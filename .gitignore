@@ -1,0 +1,8 @@
+.DS_Store
+.idea
+.vscode
+node_modules
+main
+*.out
+*.env
+*__debug_bin

@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  task:
+    build:
+      context: ..
+      dockerfile: task1/docker/Dockerfile
+    container_name: task1
+    restart: always
+    ports:
+      - "8100:8100"
+    env_file:
+      - .env
+  mongo:
+    image: mongo:4.4.6-bionic
+    command: ["mongod", "--bind_ip_all"]
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - 27020:27017
+
+volumes:
+  mongodb_data:
