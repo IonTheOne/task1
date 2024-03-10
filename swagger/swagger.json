@@ -1,0 +1,114 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API for task1 service",
+        "title": "Task1 API",
+        "contact": {},
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8100",
+    "basePath": "/",
+    "paths": {
+        "/news": {
+            "get": {
+                "description": "Fetch all news items from the database",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "news"
+                ],
+                "summary": "Get all news",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/httpentity.NewsItem"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/news/{newsItemId}": {
+            "get": {
+                "description": "Fetch a single news item from the database by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "news"
+                ],
+                "summary": "Get news by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "News Item ID",
+                        "name": "newsItemId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/httpentity.NewsItem"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "httpentity.CustomTime": {
+            "type": "object",
+            "properties": {
+                "time.Time": {
+                    "type": "string"
+                }
+            }
+        },
+        "httpentity.NewsItem": {
+            "type": "object",
+            "properties": {
+                "articleURL": {
+                    "type": "string"
+                },
+                "isPublished": {
+                    "type": "boolean"
+                },
+                "lastUpdateDate": {
+                    "$ref": "#/definitions/httpentity.CustomTime"
+                },
+                "newsArticleID": {
+                    "type": "string"
+                },
+                "optaMatchId": {
+                    "type": "string"
+                },
+                "publishDate": {
+                    "$ref": "#/definitions/httpentity.CustomTime"
+                },
+                "taxonomies": {
+                    "type": "string"
+                },
+                "teaserText": {
+                    "type": "string"
+                },
+                "thumbnailImageURL": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

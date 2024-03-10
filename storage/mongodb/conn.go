@@ -3,6 +3,7 @@ package mongodb
 import (
 	"context"
 	"log"
+	"sync"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -40,6 +41,14 @@ type Mongo struct {
 	conf   env.Config
 }
 
+var once sync.Once
+
 func NewMongo(client *mongo.Client, conf env.Config) storage.DocumentActions {
+	dbName := conf.AppMongoDBName
+	collectionName := conf.AppMongoCollectionName
+	once.Do(func() {
+		_ = client.Database(dbName).Collection(collectionName)
+		_ = client.Database(dbName).CreateCollection(context.Background(), collectionName)
+	})
 	return &Mongo{client: client, conf: conf}
 }

@@ -6,3 +6,4 @@ main
 *.out
 *.env
 *__debug_bin
+*_seeded
