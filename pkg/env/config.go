@@ -15,6 +15,8 @@ type Config struct {
 	ReadTimeout                time.Duration `envconfig:"READ-TIMEOUT" default:"15s"`
 	AppMongoDBConnectionString string        `envconfig:"APP-MONGODB-CONNECTION-STRING" required:"true"`
 	AppMongoDBName             string        `envconfig:"APP-MONGODB-NAME" required:"true"`
+	AppMongoCollectionName     string        `envconfig:"APP-MONGO-COLLECTION-NAME" required:"true"`
+	RefreshInterval            time.Duration `envconfig:"REFRESH-INTERVAL" default:"10s"`
 }
 
 func LoadConfig(cfg interface{}) {

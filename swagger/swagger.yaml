@@ -1,0 +1,75 @@
+basePath: /
+definitions:
+  httpentity.CustomTime:
+    properties:
+      time.Time:
+        type: string
+    type: object
+  httpentity.NewsItem:
+    properties:
+      articleURL:
+        type: string
+      isPublished:
+        type: boolean
+      lastUpdateDate:
+        $ref: '#/definitions/httpentity.CustomTime'
+      newsArticleID:
+        type: string
+      optaMatchId:
+        type: string
+      publishDate:
+        $ref: '#/definitions/httpentity.CustomTime'
+      taxonomies:
+        type: string
+      teaserText:
+        type: string
+      thumbnailImageURL:
+        type: string
+      title:
+        type: string
+    type: object
+host: localhost:8100
+info:
+  contact: {}
+  description: API for task1 service
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Task1 API
+  version: "1.0"
+paths:
+  /news:
+    get:
+      description: Fetch all news items from the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/httpentity.NewsItem'
+            type: array
+      summary: Get all news
+      tags:
+      - news
+  /news/{newsItemId}:
+    get:
+      description: Fetch a single news item from the database by ID
+      parameters:
+      - description: News Item ID
+        in: path
+        name: newsItemId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/httpentity.NewsItem'
+      summary: Get news by ID
+      tags:
+      - news
+swagger: "2.0"
